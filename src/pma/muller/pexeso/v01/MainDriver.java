@@ -40,7 +40,15 @@ public class MainDriver extends Activity {
 		
 		//Listener na zmìnu poètu hráèù
 		EditText editable = (EditText)findViewById(R.id.editText1);
-		editable.addTextChangedListener(new TextWatcher(){
+		editable.addTextChangedListener(zmenaPoctuHracuListener());
+	}
+	
+	/*
+	 *	Funkce hlídá kolonku poètu hráèù. Pokud dojde ke zmìnì, jsou
+	 *	pøíslušná pole neviditelná.
+	 */
+	private TextWatcher zmenaPoctuHracuListener(){
+		return new TextWatcher(){
 			 public void afterTextChanged(Editable s) {
 					findViewById(R.id.editText3).setVisibility(View.INVISIBLE);
 					findViewById(R.id.editText4).setVisibility(View.INVISIBLE);
@@ -54,9 +62,13 @@ public class MainDriver extends Activity {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 			}
-		});
+		};
 	}
 	
+	/*
+	 *	Funkce hlídá rozsah hráèù od 1-2. Zobrazuje potøebná okna pro další nastavení.
+	 *	Pokud je poèet hráèù mimo rozsah, je zobrazen Toast. 
+	 */
 	private void zadejPocetHracu(){
 		EditText pocet = (EditText)findViewById(R.id.editText1);
 		CharSequence text = pocet.getText();
@@ -78,8 +90,11 @@ public class MainDriver extends Activity {
 		}
 	}
 	
+	/*
+	 * Funkce uloží nastavení hráèe a odešle je další aktivitì.
+	 */
 	private void vytvorHru(int pocetHracu){
-		Intent intent = new Intent(getApplicationContext(), HlavniOkno.class);
+		Intent intent = new Intent(getApplicationContext(), Hra.class);
 		Bundle bund = new Bundle();
 		EditText hrac;
 		bund.putInt("pocetHracu", pocetHracu);

@@ -1,5 +1,7 @@
 package pma.muller.pexeso.v01.utils;
-
+/*
+ * Objekt typu Hrac. Obsahuje jméno hráèe a poèet jeho bodù. 
+ */
 public class Hrac {
 
 	String jmenoHrace;
